@@ -9,4 +9,4 @@ An AppImage Updater-wannabe. Written in Python and AppJar (GUI).
 
 ## Todo
 - [ ] A new style for the GUI, a more "modern look".
-- [ ] Delete that awful statusbar (just for development).
+- [x] Delete that awful statusbar (just for development).

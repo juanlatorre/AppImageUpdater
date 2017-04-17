@@ -36,16 +36,8 @@ for file in glob.glob("*.AppImage"):
 app.setRadioButtonFunction("application", choose)
 selected = [app.getRadioButton("application")]
 
-#Messages for statusbar
-wait = "waiting for user to choose an application..."
-updating = "updating the selected application..."
-
 #This button trigger the update process
 app.addButtons(["Change App Folder", "Update", "Exit"], press, 5, 0, 5)
-
-#Statusbar for easy debuggin'.
-app.addStatusbar(fields=1)
-app.setStatusbar(wait, 0)
 
 #Run the app
 app.go()
