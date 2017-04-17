@@ -5,12 +5,22 @@ from appJar import gui
 def choose(rb):
     selected[0] = app.getRadioButton(rb)
 
-def update(btn):
-    print("Beginning updating process of",selected[0])
-    app.setStatusbar(updating, 0)
+def press(name):
+    if (name=="Change App Folder"):
+        print("Folder changed")
 
-# We build our GUI
+    if (name=="Update"):
+        print("Beginning updating process of",selected[0])
+        app.setStatusbar(updating, 0)
+
+    if (name=="Exit"):
+        app.stop()
+
+# We build our GUI and do some config
 app = gui()
+app.setTitle("Application Updater")
+app.setResizable(False)
+app.setLocation(0,0)
 
 #Adding a Label with Text
 app.addLabel("welcome", "This little script allow you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")
@@ -30,10 +40,12 @@ selected = [app.getRadioButton("application")]
 wait = "waiting for user to choose an application..."
 updating = "updating the selected application..."
 
+#This button trigger the update process
+app.addButtons(["Change App Folder", "Update", "Exit"], press, 5, 0, 5)
+
 #Statusbar for easy debuggin'.
 app.addStatusbar(fields=1)
 app.setStatusbar(wait, 0)
-#This button trigger the update process
-app.addButton("Update", update)
+
 #Run the app
 app.go()

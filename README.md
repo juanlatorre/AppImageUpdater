@@ -1,6 +1,8 @@
 # Updater for AppImage (provisional name)
 An AppImage Updater-wannabe. Written in Python and AppJar (GUI).
 
+(Ugly Screenshot)[http://i.imgur.com/SBRkA6g.png]
+
 ## Future Features
 - [ ] Posibility to change the folder where the AppImages are.
 - [ ] 2 Tabs, one to list ALL the AppImages and the other one just for the AppImages with update available.
