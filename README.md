@@ -1,7 +1,7 @@
 # Updater for AppImage (provisional name)
 An AppImage Updater-wannabe. Written in Python and AppJar (GUI).
 
-(Ugly Screenshot)[http://i.imgur.com/SBRkA6g.png]
+![Ugly Screenshot](http://i.imgur.com/SBRkA6g.png)
 
 ## Future Features
 - [ ] Posibility to change the folder where the AppImages are.
