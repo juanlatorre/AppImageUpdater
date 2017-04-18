@@ -1,5 +1,12 @@
-import glob, os
+import glob, os, yaml
 from appJar import gui
+
+#We read the user settings before starting the app.
+with open("config.yaml", "r" as stream:
+        try:
+            print(yaml.load(stream))
+        except yaml.YAMLError as exc:
+            print(exc)
 
 # Function to handle the election of a Radio Check
 def choose(rb):
