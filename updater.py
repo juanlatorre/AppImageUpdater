@@ -11,12 +11,14 @@ def setAppFolder():
         prefs_file = open("prefs.txt")
     except OSError as err:
         # Esto queda pendiente de revisión, hasta ahora funciona bien si es que el archivo ha sido creado previamente.
-        print("There are no prefs, attempting to create it...")
+        print("No preference file found, attempting to create it...")
         app.infoBox("Choose App folder", "There is no App Folder set, please select the folder where you AppImages are.")
         folder = app.directoryBox(title="Select you App Folder", dirName="~/")
+        folder = folder.split('\n')[0]
         new_prefs_file = "prefs.txt"
         write_prefs = open(new_prefs_file, 'w')
         write_prefs.write(folder)
+        os.chdir(folder)
     else:
         folder = prefs_file.read()
         folder = folder.split('\n')[0]
