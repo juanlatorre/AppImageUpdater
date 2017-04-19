@@ -43,7 +43,7 @@ if (glob.glob("*.AppImage") == []):
     os.remove(scriptDir+"/prefs.txt")
 else:
     #Adding a Label with Text
-    app.addLabel("welcome", "This little script allow you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")    
+    app.addLabel("welcome", "This little script allow you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")
     for file in glob.glob("*.AppImage"):
         f = file.split('-')[0].split('.')[0]
         app.addRadioButton("application", f)
