@@ -1,8 +1,7 @@
 import glob, os
 from appJar import gui
 
-#Setting the default AppFolder:
-#folder = "/home/unnamed_query/Apps"
+scriptDir = os.path.dirname(os.path.realpath(__file__))
 
 #We read the user settings before starting the app.
 def setAppFolder():
@@ -24,24 +23,13 @@ def setAppFolder():
         folder = folder.split('\n')[0]
         os.chdir(folder)
 
-#We open a dialog to choose the folder, then we call setAppFolder.
-def changeAppFolder():
-    print("changed")
-
 # Function to handle the election of a Radio Check
 def choose(rb):
     global selected
     selected = app.getRadioButton(rb)
 
-def press(name):
-    if (name=="Change App Folder"):
-        changeAppFolder()
-
-    if (name=="Update"):
-        print("Beginning updating process of",selected[0])
-
-    if (name=="Exit"):
-        app.stop()
+def press(btn):
+    print("updated")
 
 # We build our GUI and do some config
 app = gui()
@@ -49,21 +37,21 @@ app.setTitle("Application Updater")
 app.setResizable(False)
 setAppFolder()
 
-#Adding a Label with Text
-app.addLabel("welcome", "This little script allow you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")
-
 #For every App in the folder, fill a list of Radio Button
-for file in glob.glob("*.AppImage"):
-    #appList.append(file)
-    f = file.split('-')[0].split('.')[0]
-    app.addRadioButton("application", f)
-
-#Bind the Radio Buttons to the function Choose
-app.setRadioButtonFunction("application", choose)
-selected = [app.getRadioButton("application")]
-
-#This button trigger the update process
-app.addButtons(["Change App Folder", "Update", "Exit"], press, 5, 0, 5)
+if (glob.glob("*.AppImage") == []):
+    app.addLabel("welcome", "We couldn't find any AppImage in this folder. Please run the program again.")
+    os.remove(scriptDir+"/prefs.txt")
+else:
+    #Adding a Label with Text
+    app.addLabel("welcome", "This little script allow you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")    
+    for file in glob.glob("*.AppImage"):
+        f = file.split('-')[0].split('.')[0]
+        app.addRadioButton("application", f)
+    #This button trigger the update process
+    app.addButton("Update", press, 4, 0)
+    #Bind the Radio Buttons to the function Choose
+    app.setRadioButtonFunction("application", choose)
+    selected = [app.getRadioButton("application")]
 
 #Run the app
 app.go()
