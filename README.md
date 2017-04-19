@@ -5,6 +5,8 @@ An AppImage Updater-wannabe. Written in Python and AppJar (GUI).
 
 ## Future Features
 - [x] Posibility to change the folder where the AppImages are.
+- [ ] Check is the AppImageUpdater is on Apps Folder, if not, download and
+    chmod it.
 - [ ] 2 Tabs, one to list ALL the AppImages and the other one just for the AppImages with update available.
 
 ## Todo

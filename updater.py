@@ -28,8 +28,17 @@ def choose(rb):
     global selected
     selected = app.getRadioButton(rb)
 
-def press(btn):
-    print("updated")
+def update(btn):
+    if (checkIfHasUpdater()==True):
+        #Begin the updating process
+        print("HasUpdater")
+
+def checkIfHasUpdater():
+    if (glob.glob("AppImageUpdate*.AppImage")):
+        return True
+    else:
+        os.system("curl -L -o AppImageUpdate.AppImage http://bit.ly/2onjQGp")
+        os.system("chmod a+x AppImageUpdate.AppImage")
 
 # We build our GUI and do some config
 app = gui()
@@ -42,13 +51,12 @@ if (glob.glob("*.AppImage") == []):
     app.addLabel("welcome", "We couldn't find any AppImage in this folder. Please run the program again.")
     os.remove(scriptDir+"/prefs.txt")
 else:
-    #Adding a Label with Text
     app.addLabel("welcome", "This little script allows you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")
     for file in glob.glob("*.AppImage"):
         f = file.split('-')[0].split('.')[0]
         app.addRadioButton("application", f)
     #This button trigger the update process
-    app.addButton("Update", press, 4, 0)
+    app.addButton("Update", update, 4, 0)
     #Bind the Radio Buttons to the function Choose
     app.setRadioButtonFunction("application", choose)
     selected = [app.getRadioButton("application")]
