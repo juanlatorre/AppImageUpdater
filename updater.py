@@ -31,7 +31,7 @@ def choose(rb):
 def update(btn):
     if (checkIfHasUpdater()==True):
         #Begin the updating process
-        print("HasUpdater")
+        os.system("./AppImageUpdate* /" + appname)
 
 def checkIfHasUpdater():
     if (glob.glob("AppImageUpdate*.AppImage")):
@@ -53,9 +53,12 @@ if (glob.glob("*.AppImage") == []):
 else:
     app.addLabel("welcome", "This little script allows you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")
     for file in glob.glob("*.AppImage"):
+        global appname
+        appname = file
         f = file.split('-')[0].split('.')[0]
         app.addRadioButton("application", f)
     #This button trigger the update process
+
     app.addButton("Update", update, 4, 0)
     #Bind the Radio Buttons to the function Choose
     app.setRadioButtonFunction("application", choose)
