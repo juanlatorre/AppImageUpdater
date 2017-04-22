@@ -2,6 +2,7 @@ import glob, os
 from appJar import gui
 
 scriptDir = os.path.dirname(os.path.realpath(__file__))
+updater_link = "https://github.com/probonopd/AppImageUpdate/releases/download/continuous/AppImageUpdate-x86_64.AppImage"
 
 #We read the user settings before starting the app.
 def setAppFolder():
@@ -29,16 +30,18 @@ def choose(rb):
     selected = app.getRadioButton(rb)
 
 def update(btn):
-    if (checkIfHasUpdater()==True):
+    if checkIfHasUpdater():
         #Begin the updating process
-        os.system("./AppImageUpdate* /" + appname)
+        os.system("./AppImageUpdate* ./"+selected[0]+"*")
 
 def checkIfHasUpdater():
     if (glob.glob("AppImageUpdate*.AppImage")):
         return True
     else:
-        os.system("curl -L -o AppImageUpdate.AppImage http://bit.ly/2onjQGp")
+        os.system("wget "+updater_link)
+        os.system("mv AppImageUpdate* AppImageUpdate.AppImage")
         os.system("chmod a+x AppImageUpdate.AppImage")
+        return True
 
 # We build our GUI and do some config
 app = gui()
@@ -53,15 +56,13 @@ if (glob.glob("*.AppImage") == []):
 else:
     app.addLabel("welcome", "This little script allows you to update your AppImages in ~/Apps\nSelect the Application that you want to update:")
     for file in glob.glob("*.AppImage"):
-        global appname
-        appname = file
         f = file.split('-')[0].split('.')[0]
         app.addRadioButton("application", f)
     #This button trigger the update process
 
     app.addButton("Update", update, 4, 0)
     #Bind the Radio Buttons to the function Choose
-    app.setRadioButtonFunction("application", choose)
+    app.setRadioButtonChangeFunction("application", choose)
     selected = [app.getRadioButton("application")]
 
 #Run the app
