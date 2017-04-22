@@ -1,4 +1,5 @@
-import glob, os
+# -*- coding: utf-8 -*-
+import os, sys, glob
 from appJar import gui
 
 scriptDir = os.path.dirname(os.path.realpath(__file__))
