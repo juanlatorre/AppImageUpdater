@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, sys, glob
+import os, sys, glob, tkinter
 from appJar import gui
 
 scriptDir = os.path.dirname(os.path.realpath(__file__))
